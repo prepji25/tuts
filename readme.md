@@ -15,7 +15,7 @@ mkdir prepji
 cd prepji
 
 # Create the directory structure
-mkdir -p backend frontend docker-compose
+mkdir -p backend frontend
 mkdir -p backend/apps/users backend/apps/content
 mkdir -p frontend/src/components frontend/src/lib frontend/src/app
 ```
