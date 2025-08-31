@@ -2309,6 +2309,136 @@ docker-compose exec backend python manage.py shell
 docker-compose ps
 ```
 
+# Prepji - Complete Project Structure
+
+```
+prepji/
+├── .env                                    # Environment variables
+├── docker-compose.yml                     # Docker services configuration
+│
+├── backend/                               # Django Backend
+│   ├── Dockerfile                        # Backend container configuration
+│   ├── requirements.txt                  # Python dependencies
+│   ├── manage.py                         # Django management script
+│   │
+│   ├── prepji/                           # Main Django project
+│   │   ├── __init__.py                   # Python package marker
+│   │   ├── settings.py                  # Django settings configuration
+│   │   ├── urls.py                      # Main URL routing
+│   │   ├── wsgi.py                      # WSGI application
+│   │   ├── asgi.py                      # ASGI application
+│   │   ├── celery.py                    # Celery configuration
+│   │   └── schema.py                    # Main GraphQL schema
+│   │
+│   └── apps/                            # Django applications
+│       ├── __init__.py                  # Python package marker
+│       │
+│       ├── users/                       # User management app
+│       │   ├── __init__.py              # Python package marker
+│       │   ├── models.py                # CustomUser model with age, sex, user_type
+│       │   ├── admin.py                 # Django admin configuration
+│       │   ├── schema.py                # GraphQL schema for users
+│       │   ├── apps.py                  # App configuration
+│       │   └── migrations/              # Database migrations
+│       │       └── __init__.py          # Python package marker
+│       │
+│       └── content/                     # Content management app
+│           ├── __init__.py              # Python package marker
+│           ├── models.py                # StaticPage model
+│           ├── admin.py                 # Django admin for static pages
+│           ├── schema.py                # GraphQL schema for content
+│           ├── apps.py                  # App configuration
+│           └── migrations/              # Database migrations
+│               └── __init__.py          # Python package marker
+│
+└── frontend/                            # Next.js Frontend
+    ├── Dockerfile                       # Frontend container configuration
+    ├── package.json                     # Node.js dependencies and scripts
+    ├── next.config.js                   # Next.js configuration
+    ├── tailwind.config.js               # Tailwind CSS configuration
+    ├── postcss.config.js                # PostCSS configuration
+    ├── tsconfig.json                    # TypeScript configuration
+    ├── .eslintrc.json                   # ESLint configuration
+    ├── .prettierrc                      # Prettier configuration
+    │
+    └── src/                             # Source code
+        ├── globals.css                  # Global CSS with Tailwind
+        │
+        ├── lib/                         # Utility libraries
+        │   ├── apollo-client.ts         # Apollo Client configuration
+        │   ├── auth.ts                  # Authentication service
+        │   └── utils.ts                 # Utility functions
+        │
+        ├── graphql/                     # GraphQL queries and mutations
+        │   └── queries.ts               # All GraphQL operations
+        │
+        ├── components/                  # React components
+        │   ├── apollo-wrapper.tsx       # Apollo Provider wrapper
+        │   └── ui/                      # UI components (shadcn/ui)
+        │       ├── button.tsx           # Button component
+        │       ├── input.tsx            # Input component
+        │       └── card.tsx             # Card components
+        │
+        └── app/                         # Next.js App Router pages
+            ├── layout.tsx               # Root layout
+            ├── page.tsx                 # Home page
+            │
+            ├── auth/                    # Authentication pages
+            │   ├── login/
+            │   │   └── page.tsx         # Login page with form
+            │   └── register/
+            │       └── page.tsx         # Registration page with form
+            │
+            ├── dashboard/               # Protected dashboard
+            │   └── page.tsx             # User dashboard
+            │
+            └── about/                   # Static pages
+                └── page.tsx             # About page (GraphQL powered)
+```
+
+## File Count Summary
+
+### Backend (Django)
+- **Total Files**: 17
+- **Configuration Files**: 6 (Dockerfile, requirements.txt, manage.py, settings.py, urls.py, etc.)
+- **User App Files**: 5 (models, admin, schema, apps, __init__)
+- **Content App Files**: 5 (models, admin, schema, apps, __init__)
+- **Main Project Files**: 1 (__init__.py)
+
+### Frontend (Next.js)
+- **Total Files**: 19
+- **Configuration Files**: 6 (package.json, Dockerfile, next.config.js, tailwind.config.js, tsconfig.json, etc.)
+- **Library Files**: 3 (apollo-client.ts, auth.ts, utils.ts)
+- **Component Files**: 4 (apollo-wrapper.tsx, button.tsx, input.tsx, card.tsx)
+- **Page Files**: 5 (layout.tsx, page.tsx for home, login, register, dashboard, about)
+- **GraphQL Files**: 1 (queries.ts)
+
+### Root Files
+- **Total Files**: 2
+- **Docker Configuration**: 1 (docker-compose.yml)
+- **Environment**: 1 (.env)
+
+## Key Features by Location
+
+### 🔐 **Authentication Flow**
+- **Backend**: `apps/users/` - Custom user model with JWT
+- **Frontend**: `app/auth/` - Login/Register pages with form validation
+
+### 📊 **Data Management**
+- **Backend**: `apps/content/` - Static page models
+- **Frontend**: `graphql/queries.ts` - GraphQL operations
+
+### 🎨 **UI Components**
+- **Frontend**: `components/ui/` - Reusable shadcn/ui components
+- **Styling**: `globals.css` + `tailwind.config.js`
+
+### 🏗️ **Infrastructure**
+- **Root**: `docker-compose.yml` - Multi-service Docker setup
+- **Containers**: Individual Dockerfiles for backend/frontend
+
+This structure follows industry best practices with clear separation of concerns, modular architecture, and proper containerization. Each service is independently scalable and maintainable.
+
+
 Perfect! I've created a comprehensive step-by-step tutorial for setting up your completely dockerized Prepji application. Here are the key highlights of what this setup provides:
 
 ## What You'll Get:
