@@ -193,7 +193,7 @@ django-axes==8.0.0
 strawberry-graphql-django==0.65.1
 psycopg[binary]==3.2.3
 celery[redis]==5.5.3
-redis==6.4.0
+redis==5.2.1
 channels[daphne]==4.3.1
 python-decouple==3.8
 Pillow==11.3.0
