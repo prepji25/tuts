@@ -184,19 +184,19 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 ```txt
 Django==5.2.5
 djangorestframework==3.16.1
-djangorestframework-simplejwt==5.3.0
+djangorestframework-simplejwt==5.5.1
 django-allauth==65.11.0
-dj-rest-auth==6.0.0
+dj-rest-auth==7.0.1
 django-cors-headers==4.7.0
 django-ratelimit==4.1.0
-django-axes==6.5.1
+django-axes==8.0.0
 strawberry-graphql-django==0.65.1
 psycopg[binary]==3.2.3
 celery[redis]==5.5.3
-redis==5.2.1
+redis==5.4.0
 channels[daphne]==4.3.1
 python-decouple==3.8
-Pillow==11.0.0
+Pillow==11.3.0
 ```
 
 ### 3.3 Create `backend/manage.py`
@@ -259,6 +259,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',  # ← ADD THIS LINE
     'rest_framework_simplejwt',
     'corsheaders',
     'allauth',
@@ -774,7 +775,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy project files
 COPY . .
@@ -803,9 +804,8 @@ CMD ["npm", "run", "dev"]
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@apollo/client": "^4.0.0",
+    "@apollo/client": "^3.14.0",
     "graphql": "^16.8.1",
-    "@apollo/experimental-nextjs-app-support": "^0.11.2",
     "react-hook-form": "^7.62.0",
     "zod": "^3.24.1",
     "@hookform/resolvers": "^3.10.0",
@@ -839,9 +839,9 @@ CMD ["npm", "run", "dev"]
 ```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  // experimental: {
+  //  appDir: true,
+  // },
   images: {
     domains: ['localhost'],
   },
