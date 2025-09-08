@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # Phase 2: Backend API Development Tutorial (Completely Redrafted)
 
 **Document Version:** 2.0
@@ -77,9 +75,17 @@ Each step includes **mandatory validation** before proceeding to avoid cascading
 
 ```bash
 # Create the accounts app inside the Django container
-docker-compose exec backend mkdir -p apps  
+# Create the full directory structure first
+docker-compose exec backend mkdir -p apps/accounts
+
+# Create the __init__.py file
 docker-compose exec backend touch apps/__init__.py
-docker-compose exec backend python manage.py startapp accounts apps/accounts
+
+# Now create the Django app (use a different approach)
+docker-compose exec backend python manage.py startapp accounts
+
+# Move the created app to the correct location
+docker-compose exec backend mv accounts apps/accounts
 
 # Verify the app was created
 docker-compose exec backend ls -la apps/accounts/
